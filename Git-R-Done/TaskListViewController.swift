@@ -10,7 +10,7 @@ import UIKit
 
 class TaskListViewController: UITableViewController {
     
-    let taskListArray = ["Clean BP", "Meet w/David", "1 mid yr"]
+    var taskListArray = ["Clean BP", "Meet w/David", "1 mid yr"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +45,33 @@ class TaskListViewController: UITableViewController {
         //let selectedCell = taskListArray[indexPath.row]
     }
     
+    //MARK - Add new items
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "New Git-R-Done Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add item", style: .default) { (action) in
+            //what will happen once the user clicks add item button on alert
+            
+            self.taskListArray.append(textField.text!)
+            
+            self.tableView.reloadData()
+
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
 }
 
 

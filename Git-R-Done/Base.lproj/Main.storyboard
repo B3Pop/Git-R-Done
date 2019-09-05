@@ -32,7 +32,14 @@
                             <outlet property="delegate" destination="0WB-dQ-LaP" id="43m-fc-EyP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Git-R-Done" id="Odb-gp-0YA"/>
+                    <navigationItem key="navigationItem" title="Git-R-Done" id="Odb-gp-0YA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oNZ-6X-CFp">
+                            <color key="tintColor" red="0.63921568627450975" green="0.72941176470588232" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="0WB-dQ-LaP" id="Ygw-i4-RT0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cZ-3H-eG5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
