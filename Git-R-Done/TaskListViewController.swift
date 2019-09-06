@@ -11,9 +11,15 @@ import UIKit
 class TaskListViewController: UITableViewController {
     
     var taskListArray = ["Clean BP", "Meet w/David", "1 mid yr"]
+    
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let items = defaults.array(forKey: "TaskListArray") as? [String] {
+            taskListArray = items
+        }
     }
     
     //MARK - TableView Datasource Methods
@@ -57,6 +63,8 @@ class TaskListViewController: UITableViewController {
             //what will happen once the user clicks add item button on alert
             
             self.taskListArray.append(textField.text!)
+            
+            self.defaults.set(self.taskListArray, forKey: "TaskListArray")
             
             self.tableView.reloadData()
 
