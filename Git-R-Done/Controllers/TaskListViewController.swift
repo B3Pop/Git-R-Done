@@ -11,27 +11,15 @@ import UIKit
 class TaskListViewController: UITableViewController {
     
     var taskListArray = [Item]()
-    
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let newItem = Item()
-        newItem.title = "Find Mike"
-        taskListArray.append(newItem)
+        print(dataFilePath)
         
-        let newItem1 = Item()
-        newItem1.title = "Find Mike1"
-        taskListArray.append(newItem1)
+        loadItems()
         
-        let newItem2 = Item()
-        newItem2.title = "Find Mike2"
-        taskListArray.append(newItem2)
-        
-        if let items = defaults.array(forKey: "TaskListArray") as? [Item] {
-            taskListArray = items
-        }
     }
     
     //MARK - TableView Datasource Methods
@@ -59,13 +47,7 @@ class TaskListViewController: UITableViewController {
         
         taskListArray[indexPath.row].done = !taskListArray[indexPath.row].done
         
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        
-        tableView.reloadData()
+        saveItems()
         
         tableView.deselectRow(at: indexPath, animated: true)
         //let selectedCell = taskListArray[indexPath.row]
@@ -87,10 +69,8 @@ class TaskListViewController: UITableViewController {
             
             self.taskListArray.append(newItem)
             
-            self.defaults.set(self.taskListArray, forKey: "TaskListArray")
+            self.saveItems()
             
-            self.tableView.reloadData()
-
         }
         
         alert.addTextField { (alertTextField) in
@@ -103,6 +83,37 @@ class TaskListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
         
     }
+    
+    // MARK - Model manipulation methods
+    
+    func saveItems() {
+        
+        let encoder = PropertyListEncoder()
+        
+        do {
+            
+            let datar = try encoder.encode(taskListArray)
+            try datar.write(to: dataFilePath!)
+            
+        } catch{
+            print("Error encoding item array, \(error)")
+        }
+        self.tableView.reloadData()
+        
+    }
+    
+    func loadItems() {
+        if let data = try? Data.init(contentsOf: dataFilePath!){
+            
+            let decoder = PropertyListDecoder()
+            do {
+            taskListArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding item array, \(error)")
+            }
+        }
+    }
+    
 }
 
 
