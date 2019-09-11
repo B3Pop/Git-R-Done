@@ -10,6 +10,45 @@
     </dependencies>
     <scenes>
         <!--Git-R-Done-->
+        <scene sceneID="jnc-n8-yFT">
+            <objects>
+                <tableViewController id="KJ8-O5-K0V" customClass="CategoryViewController" customModule="Git_R_Done" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DEs-Eb-GZb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="erX-j1-AHe">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="erX-j1-AHe" id="VXk-XU-yIE">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KJ8-O5-K0V" id="cH5-LE-rNu"/>
+                            <outlet property="delegate" destination="KJ8-O5-K0V" id="sWP-Do-6Yi"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Git-R-Done" id="Ogg-gF-Alf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="e3S-XB-OyF">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="KJ8-O5-K0V" id="e7R-8H-YvV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="0WB-dQ-LaP" kind="show" identifier="goToTaskList" id="7IZ-4B-Vdr"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="abI-kr-caa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1410" y="99"/>
+        </scene>
+        <!--Items-->
         <scene sceneID="AQo-wh-A9A">
             <objects>
                 <tableViewController id="0WB-dQ-LaP" customClass="TaskListViewController" customModule="Git_R_Done" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,9 +56,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="zp5-7f-7pf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="0WB-dQ-LaP" id="83Z-0u-JRV"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskListCell" id="V9k-EN-IH6">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V9k-EN-IH6" id="aTd-I2-sFY">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -32,7 +79,7 @@
                             <outlet property="delegate" destination="0WB-dQ-LaP" id="43m-fc-EyP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Git-R-Done" id="Odb-gp-0YA">
+                    <navigationItem key="navigationItem" title="Items" id="Odb-gp-0YA">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oNZ-6X-CFp">
                             <color key="tintColor" red="0.63921568627450975" green="0.72941176470588232" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -43,7 +90,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cZ-3H-eG5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826.0869565217392" y="100.44642857142857"/>
+            <point key="canvasLocation" x="2140" y="99"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nlX-rp-4qp">
@@ -60,12 +107,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="0WB-dQ-LaP" kind="relationship" relationship="rootViewController" id="Spx-mN-2AU"/>
+                        <segue destination="KJ8-O5-K0V" kind="relationship" relationship="rootViewController" id="M3n-lt-bQY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kt5-E7-Gz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="915.94202898550736" y="100.44642857142857"/>
+            <point key="canvasLocation" x="626" y="100"/>
         </scene>
     </scenes>
 </document>
