@@ -3,25 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C7B2FBC511BE8C76286617C7 /* Pods_Git_R_Done.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F1057B62F365F7EBC21881 /* Pods_Git_R_Done.framework */; };
-		E97B73202325A813009E964A /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E97B731E2325A813009E964A /* DataModel.xcdatamodeld */; };
 		E97B732223285580009E964A /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B732123285580009E964A /* CategoryViewController.swift */; };
 		E9C92DBA231997120094F181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92DB9231997120094F181 /* AppDelegate.swift */; };
 		E9C92DBC231997120094F181 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C92DBB231997120094F181 /* TaskListViewController.swift */; };
 		E9C92DBF231997120094F181 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C92DBD231997120094F181 /* Main.storyboard */; };
 		E9C92DC1231997160094F181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9C92DC0231997160094F181 /* Assets.xcassets */; };
 		E9C92DC4231997160094F181 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C92DC2231997160094F181 /* LaunchScreen.storyboard */; };
+		E9F98C14232BD7A600DE648E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F98C13232BD7A600DE648E /* Item.swift */; };
+		E9F98C16232BD7B500DE648E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F98C15232BD7B500DE648E /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7D3B58D2668EC4D6F2771925 /* Pods-Git-R-Done.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Git-R-Done.debug.xcconfig"; path = "Target Support Files/Pods-Git-R-Done/Pods-Git-R-Done.debug.xcconfig"; sourceTree = "<group>"; };
 		B4F1057B62F365F7EBC21881 /* Pods_Git_R_Done.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Git_R_Done.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B97D988C1697EF44709BA1 /* Pods-Git-R-Done.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Git-R-Done.release.xcconfig"; path = "Target Support Files/Pods-Git-R-Done/Pods-Git-R-Done.release.xcconfig"; sourceTree = "<group>"; };
-		E97B731F2325A813009E964A /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		E97B732123285580009E964A /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryViewController.swift; path = "Git-R-Done/Controllers/CategoryViewController.swift"; sourceTree = SOURCE_ROOT; };
 		E9C92DB6231997120094F181 /* Git-R-Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Git-R-Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C92DB9231997120094F181 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +30,8 @@
 		E9C92DC0231997160094F181 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9C92DC3231997160094F181 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9C92DC5231997160094F181 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9F98C13232BD7A600DE648E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		E9F98C15232BD7B500DE648E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,6 @@
 				7D3B58D2668EC4D6F2771925 /* Pods-Git-R-Done.debug.xcconfig */,
 				C6B97D988C1697EF44709BA1 /* Pods-Git-R-Done.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -65,7 +66,8 @@
 		E9B071F12322FCFE00998328 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				E97B731E2325A813009E964A /* DataModel.xcdatamodeld */,
+				E9F98C15232BD7B500DE648E /* Category.swift */,
+				E9F98C13232BD7A600DE648E /* Item.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -242,10 +244,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F98C14232BD7A600DE648E /* Item.swift in Sources */,
 				E97B732223285580009E964A /* CategoryViewController.swift in Sources */,
 				E9C92DBC231997120094F181 /* TaskListViewController.swift in Sources */,
-				E97B73202325A813009E964A /* DataModel.xcdatamodeld in Sources */,
 				E9C92DBA231997120094F181 /* AppDelegate.swift in Sources */,
+				E9F98C16232BD7B500DE648E /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,19 +450,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E97B731E2325A813009E964A /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E97B731F2325A813009E964A /* DataModel.xcdatamodel */,
-			);
-			currentVersion = E97B731F2325A813009E964A /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E9C92DAE231997120094F181 /* Project object */;
 }
