@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TaskListViewController: UITableViewController {
+class TaskListViewController: SwipeTableViewController {
     
     var listItems: Results<Item>?
     let realm = try! Realm()
@@ -24,7 +24,7 @@ class TaskListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     //MARK: - TableView Datasource Methods
@@ -35,7 +35,7 @@ class TaskListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = listItems?[indexPath.row] {
         
@@ -122,7 +122,18 @@ class TaskListViewController: UITableViewController {
         tableView.reloadData()
     
     }
-    
+    //MARK: - Delete data from Swipe
+    override func updateModel(at indexPath: IndexPath) {
+        if let itemForDeletion = self.listItems?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(itemForDeletion)
+                }
+            } catch {
+                print("Error deleting item, \(error)")
+            }
+        }
+    }
 }
 
 // MARK: - Search Bar Methods

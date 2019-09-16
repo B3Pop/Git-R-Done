@@ -7,5 +7,6 @@ target 'Git-R-Done' do
   # Pods for Git-R-Done
 
 pod 'RealmSwift'
+pod 'SwipeCellKit', '2.6.0'
 
 end
