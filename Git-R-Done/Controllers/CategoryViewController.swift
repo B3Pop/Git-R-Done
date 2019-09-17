@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class CategoryViewController: SwipeTableViewController {
     
@@ -21,9 +22,10 @@ class CategoryViewController: SwipeTableViewController {
         
         loadCategories()
         
+        tableView.separatorStyle = .none
     }
 
-    // MARK: - Table view data source
+    // MARK: - Tableview data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -35,15 +37,27 @@ class CategoryViewController: SwipeTableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        cell.textLabel?.text = categoryListArray?[indexPath.row].name ?? "No categories found"
+        if let category = categoryListArray?[indexPath.row] {
+         
+            cell.textLabel?.text = category.name
+            
+            guard let categoryColor = UIColor(hexString: category.color) else {fatalError()}
+            
+            cell.backgroundColor = categoryColor
+            
+            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+            
+        }
         
         return cell
     }
     
-    // MARK: - Table view delegate methods
+    // MARK: - Tableview delegate methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "goToTaskList", sender: self)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,7 +65,9 @@ class CategoryViewController: SwipeTableViewController {
         let destinationVC = segue.destination as! TaskListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
+            
             destinationVC.selectedCategory = categoryListArray?[indexPath.row]
+            
         }
     }
     
@@ -66,7 +82,10 @@ class CategoryViewController: SwipeTableViewController {
         let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
             
             let newCategory = Category()
+            
             newCategory.name = textField.text!
+            
+            newCategory.color = UIColor.randomFlat.hexValue()
             
             self.save(category: newCategory)
             
