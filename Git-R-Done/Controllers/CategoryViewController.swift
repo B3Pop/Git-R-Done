@@ -71,6 +71,31 @@ class CategoryViewController: SwipeTableViewController {
         }
     }
     
+    //MARK: - Data manipulation methods
+    
+    func save(category: Category) {
+        
+        do {
+            try realm.write {
+                
+                realm.add(category)
+            }
+        } catch{
+            
+            print("Error saving category \(error)")
+        }
+        
+        tableView.reloadData()
+        
+    }
+    
+    func loadCategories() {
+        
+        categoryListArray = realm.objects(Category.self)
+        
+        tableView.reloadData()
+    }
+ 
     //MARK: - Add new items
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -92,7 +117,9 @@ class CategoryViewController: SwipeTableViewController {
         }
         
         alert.addTextField { (alertTextField) in
+            
             alertTextField.placeholder = "Create new category"
+            
             textField = alertTextField
         }
         
@@ -101,37 +128,26 @@ class CategoryViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
         
     }
-    //MARK: - Data manipulation methods
-    
-    func save(category: Category) {
-        
-        do {
-            try realm.write {
-                realm.add(category)
-            }
-        } catch{
-            print("Error saving category \(error)")
-        }
-        tableView.reloadData()
-        
-    }
-    
-    func loadCategories() {
-        
-        categoryListArray = realm.objects(Category.self)
-        tableView.reloadData()
-    }
-    
+
     //MARK: - Delete data from Swipe
     override func updateModel(at indexPath: IndexPath) {
-                if let categoryForDeletion = self.categoryListArray?[indexPath.row] {
-                    do {
-                        try self.realm.write {
-                            self.realm.delete(categoryForDeletion)
-                        }
-                    } catch {
-                        print("Error deleting category, \(error)")
-                    }
+        
+        if let categoryForDeletion = self.categoryListArray?[indexPath.row] {
+            
+            do {
+                
+                try self.realm.write {
+                    
+                    self.realm.delete(categoryForDeletion)
+                    
                 }
+                
+            } catch {
+                
+                print("Error deleting category, \(error)")
+                
+            }
+            
+        }
     }
 }

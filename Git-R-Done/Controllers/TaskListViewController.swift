@@ -13,6 +13,7 @@ import ChameleonFramework
 class TaskListViewController: SwipeTableViewController {
     
     var listItems: Results<Item>?
+    
     let realm = try! Realm()
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -20,6 +21,7 @@ class TaskListViewController: SwipeTableViewController {
     var selectedCategory: Category? {
         
         didSet {
+            
             loadItems()
         }
         
@@ -70,7 +72,9 @@ class TaskListViewController: SwipeTableViewController {
     //MARK: - TableView Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return listItems?.count ?? 1
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,11 +111,16 @@ class TaskListViewController: SwipeTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let item = listItems?[indexPath.row] {
+            
             do {
+                
                 try realm.write {
+                    
                     item.done = !item.done
                 }
+                
             } catch {
+                
                 print("Error saving done status, \(error)")
             }
 
@@ -120,7 +129,7 @@ class TaskListViewController: SwipeTableViewController {
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
-        //let selectedCell = taskListArray[indexPath.row]
+
     }
     
     //MARK: - Add new items
@@ -132,18 +141,28 @@ class TaskListViewController: SwipeTableViewController {
         let alert = UIAlertController(title: "New Git-R-Done Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
-            //what will happen once the user clicks add item button on alert
+
             if let currentCategory = self.selectedCategory {
+                
                 do {
+                    
                     try self.realm.write {
+                        
                         let newItem = Item()
+                        
                         newItem.title = textField.text!
+                        
                         newItem.dateCreated = Date()
+                        
                         currentCategory.items.append(newItem)
                     }
+                    
                 } catch{
+                    
                     print("Error saving item \(error)")
+                    
                 }
+                
             }
 
             self.tableView.reloadData()
@@ -151,7 +170,9 @@ class TaskListViewController: SwipeTableViewController {
         }
         
         alert.addTextField { (alertTextField) in
+            
             alertTextField.placeholder = "Create new item"
+            
             textField = alertTextField
         }
         
@@ -163,8 +184,6 @@ class TaskListViewController: SwipeTableViewController {
     
     // MARK: - Model manipulation methods
     
-
-    
     func loadItems() {
 
         listItems = selectedCategory?.items.sorted(byKeyPath: "dateCreated", ascending: true)
@@ -172,14 +191,23 @@ class TaskListViewController: SwipeTableViewController {
         tableView.reloadData()
     
     }
+    
     //MARK: - Delete data from Swipe
+    
     override func updateModel(at indexPath: IndexPath) {
+        
         if let itemForDeletion = self.listItems?[indexPath.row] {
+            
             do {
+                
                 try self.realm.write {
+                    
                     self.realm.delete(itemForDeletion)
+                    
                 }
+                
             } catch {
+                
                 print("Error deleting item, \(error)")
             }
         }
